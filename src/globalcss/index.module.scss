@@ -42,11 +42,27 @@
   margin-top: 1rem;
 }
 
+.contentmodel{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .board {
   display: grid;
   grid-template: repeat(4, 60px) / repeat(4, 60px);
   cursor: pointer;
   position: relative;
+}
+
+.roomtypes{
+  font-weight: bold;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.radioGroup{
+    margin-top: 1rem;
 }
 
 .boxitem {
