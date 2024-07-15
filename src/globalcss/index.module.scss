@@ -1,0 +1,31 @@
+.tictactoe {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.navigator {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aqua;
+}
+
+.board {
+  display: grid;
+  grid-template: repeat(4, 60px) / repeat(4, 60px);
+  cursor: pointer;
+  position: relative;
+}
+
+.boxitem {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
