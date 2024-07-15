@@ -2,8 +2,28 @@
   width: 90%;
   height: 90%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   margin-top: 1rem;
+}
+
+.tictacheader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.headerbtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  height: 20px;
+  gap: 4px;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
 }
 
 .navigator {
@@ -14,6 +34,12 @@
   justify-content: space-between;
   align-items: center;
   background-color: aqua;
+}
+
+.wrapperBoard {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .board {
