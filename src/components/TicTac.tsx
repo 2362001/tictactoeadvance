@@ -14,11 +14,6 @@ import Setting from "./step/Setting";
 const TicTac = () => {
   const [openModel, setOpenModel] = useState<boolean>(false);
   const updateSearchRoom = useStore((state) => state.setSizeBox);
-
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -83,7 +78,7 @@ const TicTac = () => {
             </div>
           </div>
           <div className={styles.tabss}>
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+            <Tabs defaultActiveKey="1" items={items}/>
           </div>
         </div>
       </div>
