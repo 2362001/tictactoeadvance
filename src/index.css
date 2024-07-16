@@ -8,7 +8,8 @@
 .app {
   width: 90%;
   height: 90%;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;

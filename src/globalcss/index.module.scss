@@ -13,7 +13,33 @@
   gap: 8px;
 }
 
+.searchRoom {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
 .headerbtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  height: 20px;
+  gap: 4px;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.inputsearch {
+  width: auto;
+}
+
+.searchbtn {
+  width: auto;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -29,8 +55,11 @@
 .navigator {
   width: 100%;
   height: 2rem;
+  position: sticky;
+  top: 0;
   display: flex;
-  padding: 0 20px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
   background-color: aqua;
@@ -38,11 +67,43 @@
 
 .wrapperBoard {
   display: flex;
-  justify-content: center;
+  height: 100%;
+  margin-top: 1rem;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 1rem 1rem;
+}
+
+.allreadytext {
+  display: flex;
+  gap: 4px;
   margin-top: 1rem;
 }
 
-.contentmodel{
+.readytext {
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: chartreuse;
+  cursor: pointer;
+}
+
+.leaveroom {
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: red;
+}
+
+.contentmodel {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -50,19 +111,28 @@
 
 .board {
   display: grid;
-  grid-template: repeat(4, 60px) / repeat(4, 60px);
+  grid-template: repeat(6, 60px) / repeat(6, 60px);
   cursor: pointer;
   position: relative;
 }
 
-.roomtypes{
+.roominfo {
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.roomtypes {
   font-weight: bold;
   font-size: 1rem;
   font-style: italic;
 }
 
-.radioGroup{
-    margin-top: 1rem;
+.radioGroup {
+  margin-top: 1rem;
 }
 
 .boxitem {
@@ -70,4 +140,70 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.contentboard {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.ownuser {
+  height: 100%;
+  background-color: red;
+}
+
+.guestuser {
+  height: 100%;
+  background-color: red;
+}
+
+.tabss {
+  width: 100%;
+}
+
+
+.stepsetting {
+  width: 100%;
+  max-height: 9rem;
+  overflow-y: scroll;
+}
+
+.inputsetting {
+  width: 5rem;
+}
+
+.stepsettingboardcontent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.changebutton {
+  width: 3rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  height: 20px;
+  gap: 4px;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.stepsettingboardlabel {
+  font-size: 1rem;
+  font-weight: bold;
 }

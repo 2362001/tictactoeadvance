@@ -1,6 +1,16 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
-export const useStore = create((set) => ({
-  bears: 0,
-  increasePopulation: () => set((state: A) => ({ bears: state.bears + 1 })),
-}))
+export type State = {
+  sizeBox: number | string;
+};
+
+export type Action  = {
+  setSizeBox: (firstName: State['sizeBox']) => void
+  resetSizeBox: (lastName: State['sizeBox']) => void
+};
+
+export const useStore = create<State & Action>((set) => ({
+  sizeBox: 0,
+  setSizeBox: () => set((state: A) => ({ sizeBox: state.sizeBox })),
+  resetSizeBox: () => set((state: A) => ({ sizeBox: state.sizeBox })),
+}));

@@ -4,22 +4,10 @@ import styles from "../globalcss/index.module.scss";
 const Board = () => {
   return (
     <div className={styles.board}>
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
-      <BoxItem />
+      {Array(36)
+        .fill(1).map((_, index) => (
+          <BoxItem key={index} />
+        ))}
     </div>
   );
 };
