@@ -1,9 +1,44 @@
+:global {
+  .board-3 {
+    grid-template-columns: repeat(3, minmax(40px, 1fr));
+    grid-template-rows: repeat(3, minmax(40px, 1fr));
+  }
+
+  .board-6 {
+    grid-template-columns: repeat(6, minmax(40px, 1fr));
+    grid-template-rows: repeat(6, minmax(40px, 1fr));
+  }
+
+  .board-9 {
+    grid-template-columns: repeat(9, minmax(40px, 1fr));
+    grid-template-rows: repeat(9, minmax(40px, 1fr));
+  }
+
+  .x-hover:hover::after {
+    content: "X";
+    opacity: 0.4;
+  }
+
+  .o-hover:hover::after {
+    content: "O";
+    opacity: 0.4;
+  }
+}
+
 .tictactoe {
   width: 90%;
   height: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+}
+
+.right-border {
+  border-right: 0.2em solid #0074a6;
+}
+
+.bottom-border {
+  border-bottom: 0.2em solid #0074a6;
 }
 
 .tictacheader {
@@ -116,26 +151,6 @@
   max-width: 490px;
   max-height: 490px;
   position: relative;
-}
-
-:global {
-  .board-3 {
-    grid-template-columns: repeat(3, minmax(40px, 1fr));
-    grid-template-rows: repeat(3, minmax(40px, 1fr));
-    grid-gap: 10px;
-  }
-
-  .board-6 {
-    grid-template-columns: repeat(6, minmax(40px, 1fr));
-    grid-template-rows: repeat(6, minmax(40px, 1fr));
-    grid-gap: 10px;
-  }
-
-  .board-9 {
-    grid-template-columns: repeat(9, minmax(40px, 1fr));
-    grid-template-rows: repeat(9, minmax(40px, 1fr));
-    grid-gap: 10px;
-  }
 }
 
 .roominfo {

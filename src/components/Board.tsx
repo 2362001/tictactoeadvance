@@ -1,19 +1,28 @@
 import BoxItem from "./BoxItem";
 import styles from "../globalcss/index.module.scss";
 import { useStore } from "../store/store";
+import React from "react";
 
-const Board = () => {
+interface IBoard {
+  onBoxItemClick?: A;
+  allValueBoxItem: A[];
+  playerTurn?: string;
+}
+const Board: React.FC<IBoard> = (props) => {
+  const { onBoxItemClick, allValueBoxItem, playerTurn } = props;
   const sizeBox = useStore((state) => state.sizeBox);
-  const sizeCss = useStore((state) => state.sizeCss);
-  console.log(sizeBox);
-  
+
   return (
-    <div className={`${styles.board} board-${sizeCss}`}>
-      {Array(Number(sizeBox) ** 2)
-        .fill(1)
-        .map((_, index) => (
-          <BoxItem key={index} />
-        ))}
+    <div className={`${styles.board} board-${sizeBox}`}>
+      {allValueBoxItem.map((_, index) => (
+        <BoxItem
+          handleClick={onBoxItemClick}
+          index={index}
+          key={index}
+          playerTurn={playerTurn}
+          value={allValueBoxItem[index]}
+        />
+      ))}
     </div>
   );
 };

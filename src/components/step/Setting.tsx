@@ -1,12 +1,11 @@
 import { Radio, RadioChangeEvent, Space } from "antd";
-import styles from "../../globalcss/index.module.scss";
 import { useState } from "react";
+import styles from "../../globalcss/index.module.scss";
 import { useStore } from "../../store/store";
 
 const Setting = () => {
   const [boardSize, setBoardSize] = useState(3);
   const updateSearchRoom = useStore((state) => state.setSizeBox);
-  const updateSetSizeCss = useStore((state) => state.setSizeCss);
 
   const boardOption = [
     { label: "3x3", value: "3" },
@@ -20,7 +19,6 @@ const Setting = () => {
 
   const handleChanged = () => {
     updateSearchRoom(boardSize);
-    updateSetSizeCss(boardSize);
   };
 
   return (

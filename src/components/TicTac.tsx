@@ -1,5 +1,5 @@
 import { Input, Tabs, TabsProps } from "antd";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { BsPatchPlusFill } from "react-icons/bs";
 import { IoRefresh } from "react-icons/io5";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
@@ -10,10 +10,21 @@ import ModelNewGame from "./ModelNewGame";
 import Chat from "./step/Chat";
 import Step from "./step/Step";
 import Setting from "./step/Setting";
+import clickSoundx from "../sounds/click.wav";
 
 const TicTac = () => {
   const [openModel, setOpenModel] = useState<boolean>(false);
+  const sizeBox = useStore((state) => state.sizeBox);
+  const [allValueBoxItem, setAllValueBoxItem] = useState<A[]>(
+    Array(Number(sizeBox) ** 2).fill(null)
+  );
+  const PLAYER_X = "X";
+  const PLAYER_O = "O";
+  const [playerTurn, setPlayerTurn] = useState<string>(PLAYER_X);
   const updateSearchRoom = useStore((state) => state.setSizeBox);
+  const clickSound = new Audio(clickSoundx);
+  clickSound.volume = 0.5;
+
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -31,6 +42,29 @@ const TicTac = () => {
       children: <Setting />,
     },
   ];
+
+  const handleBoxItemClick = (index: number) => {
+    const newAllValueBoxItem = [...allValueBoxItem];
+    newAllValueBoxItem[index] = playerTurn;
+    setAllValueBoxItem(newAllValueBoxItem);
+    console.log(allValueBoxItem[index]);
+
+    if (allValueBoxItem[index] !== null) {
+      return false;
+    }
+
+    if (playerTurn === PLAYER_X) {
+      setPlayerTurn(PLAYER_O);
+    } else {
+      setPlayerTurn(PLAYER_X);
+    }
+  };
+
+  useEffect(() => {
+    if (allValueBoxItem.some((box) => box !== null)) {
+      clickSound.play();
+    }
+  }, [allValueBoxItem, clickSound]);
 
   return (
     <Fragment>
@@ -71,14 +105,18 @@ const TicTac = () => {
             <span className={styles.leaveroom}>Leave Room</span>
           </div>
           <div className={styles.contentboard}>
-            <Board />
+            <Board
+              onBoxItemClick={handleBoxItemClick}
+              allValueBoxItem={allValueBoxItem}
+              playerTurn={playerTurn}
+            />
             <div className={styles.userinfo}>
               <div className={styles.ownuser}>1</div>
               <div className={styles.guestuser}>2</div>
             </div>
           </div>
           <div className={styles.tabss}>
-            <Tabs defaultActiveKey="1" items={items}/>
+            <Tabs defaultActiveKey="1" items={items} />
           </div>
         </div>
       </div>
