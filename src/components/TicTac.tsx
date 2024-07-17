@@ -11,19 +11,23 @@ import Chat from "./step/Chat";
 import Step from "./step/Step";
 import Setting from "./step/Setting";
 import clickSoundx from "../sounds/click.wav";
+import overgame from "../sounds/game_over.wav";
 
 const TicTac = () => {
   const [openModel, setOpenModel] = useState<boolean>(false);
   const sizeBox = useStore((state) => state.sizeBox);
-  const [allValueBoxItem, setAllValueBoxItem] = useState<A[]>(
+  const [allValueBoxItem, setAllValueBoxItem] = useState<string[]>(
     Array(Number(sizeBox) ** 2).fill(null)
   );
+  const [strikeClass, setStrikeClass] = useState();
   const PLAYER_X = "X";
   const PLAYER_O = "O";
   const [playerTurn, setPlayerTurn] = useState<string>(PLAYER_X);
   const updateSearchRoom = useStore((state) => state.setSizeBox);
   const clickSound = new Audio(clickSoundx);
+  const overgame1 = new Audio(overgame);
   clickSound.volume = 0.5;
+  overgame1.volume = 0.8;
 
   const items: TabsProps["items"] = [
     {
@@ -43,21 +47,80 @@ const TicTac = () => {
     },
   ];
 
-  const handleBoxItemClick = (index: number) => {
-    const newAllValueBoxItem = [...allValueBoxItem];
-    newAllValueBoxItem[index] = playerTurn;
-    setAllValueBoxItem(newAllValueBoxItem);
-    console.log(allValueBoxItem[index]);
+  useEffect(() => {
+    setAllValueBoxItem(Array(Number(sizeBox) ** 2).fill(null));
+  }, [sizeBox]);
 
+  const createSubArrays = (arr: number[], subArraySize: number) => {
+    const subArrays = [];
+    const subArraysCross = [];
+    const upSubArraySize = subArraySize + 1;
+    const downSubArraySize = subArraySize - 1;
+
+    for (let i = 0; i < arr.length; i += subArraySize) {
+      subArrays.push(arr.slice(i, i + subArraySize));
+    }
+
+    for (let i = 0; i < subArraySize; i++) {
+      const array = [];
+      for (let j = i; j < arr.length; j += subArraySize) {
+        array.push(arr[j]);
+      }
+      subArrays.push(array);
+    }
+
+    for (let i = 0; i < arr.length; i += upSubArraySize) {
+      subArraysCross.push(arr[i]);
+    }
+
+    for (let i = downSubArraySize; i < arr.length; i += downSubArraySize) {
+      if (i !== arr.length - 1) {
+        subArraysCross.push(arr[i]);
+      }
+    }
+
+    if (subArraysCross.length > 0) {
+      const halfLength = Math.floor(subArraysCross.length / 2);
+      subArrays.push(subArraysCross.slice(0, halfLength));
+      subArrays.push(subArraysCross.slice(halfLength));
+    }
+    return subArrays;
+  };
+
+  const checkWinner = (board: string[]): string | null => {
+    const crtArray = [];
+    for (let index = 0; index < Number(sizeBox) ** 2; index++) {
+      crtArray.push(index);
+    }
+    const winningCombinations = createSubArrays(crtArray, Number(sizeBox));
+    console.log(winningCombinations);
+    
+    for (const [a, b, c] of winningCombinations) {
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        return board[a];
+      }
+    }
+    return null;
+  };
+
+  const handleBoxItemClick = (index: number) => {
     if (allValueBoxItem[index] !== null) {
       return false;
     }
 
-    if (playerTurn === PLAYER_X) {
-      setPlayerTurn(PLAYER_O);
-    } else {
-      setPlayerTurn(PLAYER_X);
+    const newAllValueBoxItem = [...allValueBoxItem];
+    newAllValueBoxItem[index] = playerTurn;
+    setAllValueBoxItem(newAllValueBoxItem);
+
+    const winner = checkWinner(newAllValueBoxItem);
+    if (winner) {
+      overgame1.play();
+      console.log("thành công");
+      // setAllValueBoxItem(Array(Number(sizeBox) ** 2).fill(null));
+      return;
     }
+
+    setPlayerTurn(playerTurn === PLAYER_X ? PLAYER_O : PLAYER_X);
   };
 
   useEffect(() => {
@@ -65,6 +128,12 @@ const TicTac = () => {
       clickSound.play();
     }
   }, [allValueBoxItem, clickSound]);
+
+  useEffect(() => {
+    if (checkWinner(allValueBoxItem)) {
+      overgame1.play();
+    }
+  }, [allValueBoxItem, overgame1]);
 
   return (
     <Fragment>
@@ -109,6 +178,7 @@ const TicTac = () => {
               onBoxItemClick={handleBoxItemClick}
               allValueBoxItem={allValueBoxItem}
               playerTurn={playerTurn}
+              strikeClass={strikeClass}
             />
             <div className={styles.userinfo}>
               <div className={styles.ownuser}>1</div>
