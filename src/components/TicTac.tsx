@@ -94,7 +94,7 @@ const TicTac = () => {
     }
     const winningCombinations = createSubArrays(crtArray, Number(sizeBox));
     console.log(winningCombinations);
-    
+
     for (const [a, b, c] of winningCombinations) {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         return board[a];
@@ -114,9 +114,7 @@ const TicTac = () => {
 
     const winner = checkWinner(newAllValueBoxItem);
     if (winner) {
-      overgame1.play();
-      console.log("thành công");
-      // setAllValueBoxItem(Array(Number(sizeBox) ** 2).fill(null));
+      // overgame1.play();
       return;
     }
 
@@ -131,7 +129,7 @@ const TicTac = () => {
 
   useEffect(() => {
     if (checkWinner(allValueBoxItem)) {
-      overgame1.play();
+      // overgame1.play();
     }
   }, [allValueBoxItem, overgame1]);
 
